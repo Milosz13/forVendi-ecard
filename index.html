@@ -103,11 +103,11 @@
     }
 
     .popup-link-element {
-      font-size: 13px;
+      font-size: 14px;
       color: #191919;
       font-weight: 400;
       vertical-align: middle;
-      margin-left: 10px;
+      margin-left: 8px;
       text-decoration: none;
     }
 
@@ -125,7 +125,7 @@
 
     #popup {
       width: 250px;
-      height: 230px;
+      height: 180px;
       background-color: #fff;
       padding: 10px;
     }
@@ -135,12 +135,24 @@
     }
 
     #myInput {
+      border-radius: 50px;
       margin: 0 10px;
       width: 120px;
-      height: 20px;
-      border: 1px solid #5a5a5a;
+      height: 22px;
+      border: 0.5px solid #5a5a5a;
       padding: 5px;
       vertical-align: middle;
+    }
+    #copyTextButton {
+      border-radius: 50px;
+      background-color: #0099c2;
+      color: #fff;
+      border: 0px;
+      font-family: "Outfit", sans-serif;
+      height: 20px;
+      width: 50px;
+      vertical-align: middle;
+      cursor: pointer;
     }
   </style>
 
@@ -161,8 +173,8 @@
             fill: #f3fcff;
             filter: drop-shadow(-20px 15px 16px rgba(186, 224, 235, 0.2));
             z-index: -1;
-            padding-top: 25px;
-            left: 0;
+            padding-top: 30px;
+            left: -7px;
             overflow: hidden;
           "
         >
@@ -349,14 +361,23 @@
       </div>
       <div id="overlay">
         <div id="popup">
-          <div style="text-align: right">
-            <img
-              src="assets/x.png"
+          <div style="text-align: right; margin-bottom: 5px">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
               id="closeButton"
-              height="16"
-              width="16"
+              height="18"
+              width="18"
               onclick="closePopup()"
-            />
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                fill="#0099C2"
+              />
+            </svg>
           </div>
 
           <div style="vertical-align: middle; padding: 0px 8px 8px 0">
@@ -421,24 +442,14 @@
                 fill="#0099C2"
               />
             </svg>
-            <input
-              type="text"
-              id="myInput"
-              value="https://card.identitygroup.pl/ID-Ecard/"
-            />
-            <button
-              onclick="copyText()"
-              style="
-                color: #191919;
-                font-family: Outfit, sans-serif;
-                height: 20px;
-                vertical-align: middle;
-              "
-            >
-              Kopiuj
-            </button>
+            <input type="text" id="myInput" value="url here" />
+            <button id="copyTextButton" onclick="copyText()">Kopiuj</button>
             <div
-              style="color: #d21e1e; font-family: Khand; font-size: 10px"
+              style="
+                color: #0099c2;
+                font-family: Outfit, sans-serif;
+                font-size: 10px;
+              "
               id="copyMessage"
             ></div>
           </div>
@@ -458,12 +469,12 @@
 
           // Android
           if (navigator.userAgent.match(/Android/i)) {
-            window.location.href = "linkedin://profile/lssdesigner";
+            window.location.href = "linkedin://profile/marek-ziemba";
           }
           // iOS
           else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
             window.location.href =
-              "https://www.linkedin.com/profile/view?id=lssdesigner";
+              "https://www.linkedin.com/profile/view?id=marek-ziemba";
           }
         }
       }
