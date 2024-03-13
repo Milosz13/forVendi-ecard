@@ -442,7 +442,7 @@
                 fill="#0099C2"
               />
             </svg>
-            <input type="text" id="myInput" value="url here" />
+            <input readonly type="text" id="myInput" value="url here" />
             <button id="copyTextButton" onclick="copyText()">Kopiuj</button>
             <div
               style="
@@ -488,22 +488,10 @@
       }
 
       function copyText() {
-        const inputField = document.getElementById("myInput");
+        const inputField = document.getElementById("myInput").select();
         const copyMessage = document.getElementById("copyMessage");
 
-        navigator.clipboard
-          .writeText(inputField.value)
-          .then(() => {
-            copyMessage.textContent = "copied to clipboard";
-
-            setTimeout(function () {
-              copyMessage.textContent = "";
-            }, 1500);
-          })
-          .catch((err) => {
-            console.error("error", err);
-            copyMessage.textContent = "error failed to copy";
-          });
+        document.execCommand(`copy`);
       }
 
       function createContact() {
