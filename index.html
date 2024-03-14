@@ -1,364 +1,317 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E Business Card</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap"
       rel="stylesheet"
     />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background-color: #fafafa;
+      }
+
+      .container {
+        min-width: 360px;
+        position: relative;
+        height: 767px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .background {
+        background: linear-gradient(0deg, #f7f7f7 0%, #f7f7f7 100%), #fff;
+        position: absolute;
+      }
+
+      .logo img {
+        margin: 24px 0 30px 0;
+      }
+
+      .employee-info img {
+        border-radius: 100px;
+      }
+
+      .employee-info h1 {
+        margin: 35px 0 12px 0;
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: 500;
+        color: #191919;
+        line-height: 20px;
+        letter-spacing: 0.8px;
+      }
+
+      .employee-info h2 {
+        color: #0099c2;
+        font-family: "Outfit", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        margin: 0 0 34px 0;
+      }
+      .buttons {
+        margin-bottom: 34px;
+      }
+
+      .data {
+        padding: 0 24px 0 24px;
+      }
+
+      .data-element {
+        background-color: #fff;
+        border-bottom: 1px dashed rgba(0, 153, 194, 0.25);
+        width: 312px;
+        max-width: 312px;
+        margin-bottom: 10px;
+      }
+      .data-element-content {
+        vertical-align: middle;
+        padding: 8px 12px 8px 8px;
+      }
+      .link-element {
+        color: #191919;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 18px;
+        vertical-align: middle;
+        padding-left: 7px;
+        text-decoration: none;
+      }
+
+      .popup-link-element {
+        font-size: 14px;
+        color: #191919;
+        font-weight: 400;
+        vertical-align: middle;
+        margin-left: 8px;
+        text-decoration: none;
+      }
+
+      .floating-buttons {
+        float: right;
+        position: fixed;
+        right: 24px;
+        bottom: 40px;
+      }
+      .floating-buttons a {
+        cursor: pointer;
+      }
+
+      .svgElem {
+        position: absolute;
+        right: 0;
+        top: 121px;
+        z-index: -1;
+      }
+
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+      }
+
+      #popup {
+        width: 250px;
+        height: 180px;
+        background-color: #fff;
+        padding: 10px;
+      }
+
+      #closeButton {
+        cursor: pointer;
+      }
+
+      #myInput {
+        border-radius: 50px;
+        margin: 0 5px;
+        width: 120px;
+        height: 22px;
+        border: 0.5px solid #5a5a5a;
+        padding: 5px;
+        vertical-align: middle;
+      }
+      #copyTextButton {
+        border-radius: 50px;
+        background-color: #0099c2;
+        color: #fff;
+        border: 0px;
+        font-family: "Outfit", sans-serif;
+        height: 20px;
+        width: 50px;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      #copyMessage {
+        color: #0099c2;
+        font-family: "Outfit", sans-serif;
+        font-size: 10px;
+      }
+
+      /* @media only screen and (min-width: 768px) {
+        .container {
+          max-width: 500px;
+          margin: auto;
+        }
+      } */
+    </style>
   </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Outfit", sans-serif;
-      background-color: #fafafa;
-    }
 
-    .container {
-      max-width: 360px;
-      width: 360px;
-      position: relative;
-      margin: auto;
-    }
-    .background {
-      width: 360px;
-      background: linear-gradient(0deg, #f7f7f7 0%, #f7f7f7 100%), #fff;
-      z-index: -100;
-      position: absolute;
-      overflow: hidden;
-      height: 776px;
-    }
-
-    .logo {
-      text-align: center;
-    }
-
-    .logo img {
-      margin: 24px 0 30px 0;
-    }
-
-    .employee-info {
-      text-align: center;
-      z-index: -100;
-    }
-    .employee-info img {
-      border-radius: 100px;
-    }
-
-    .employee-info h1 {
-      margin: 35px 0 12px 0;
-      font-size: 20px;
-      line-height: 20px;
-      font-weight: 500;
-      color: #191919;
-      line-height: 20px;
-      letter-spacing: 0.8px;
-    }
-
-    .employee-info h2 {
-      color: #0099c2;
-      font-family: Outfit;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 16px;
-      margin: 0 0 34px 0;
-    }
-    .buttons {
-      text-align: center;
-      margin-bottom: 34px;
-    }
-
-    .data {
-      margin: 0 24px 0 24px;
-    }
-
-    .data-element {
-      background-color: #fff;
-      border-bottom: 1px dashed rgba(0, 153, 194, 0.25);
-      max-width: 312px;
-      margin-bottom: 10px;
-    }
-    .data-element-content {
-      vertical-align: middle;
-      padding: 8px 12px 8px 8px;
-    }
-    .link-element {
-      color: #191919;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 18px;
-      vertical-align: middle;
-      padding-left: 7px;
-      text-decoration: none;
-    }
-
-    .popup-link-element {
-      font-size: 14px;
-      color: #191919;
-      font-weight: 400;
-      vertical-align: middle;
-      margin-left: 8px;
-      text-decoration: none;
-    }
-
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      align-items: center;
-      justify-content: center;
-    }
-
-    #popup {
-      width: 250px;
-      height: 180px;
-      background-color: #fff;
-      padding: 10px;
-    }
-
-    #closeButton {
-      cursor: pointer;
-    }
-
-    #myInput {
-      border-radius: 50px;
-      margin: 0 10px;
-      width: 120px;
-      height: 22px;
-      border: 0.5px solid #5a5a5a;
-      padding: 5px;
-      vertical-align: middle;
-    }
-    #copyTextButton {
-      border-radius: 50px;
-      background-color: #0099c2;
-      color: #fff;
-      border: 0px;
-      font-family: "Outfit", sans-serif;
-      height: 20px;
-      width: 50px;
-      vertical-align: middle;
-      cursor: pointer;
-    }
-  </style>
-
-  <body>
+  <body
+    style="background: linear-gradient(0deg, #f7f7f7 0%, #f7f7f7 100%), #fff"
+  >
     <div class="container">
-      <div class="background">
-        <div class="logo">
-          <img src="assets/logo.png" width="202" height="48" alt="logo" />
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="360"
-          height="601"
-          viewBox="0 0 360 601"
-          fill="none"
-          style="
-            position: absolute;
-            fill: #f3fcff;
-            filter: drop-shadow(-20px 15px 16px rgba(186, 224, 235, 0.2));
-            z-index: -1;
-            padding-top: 30px;
-            left: -7px;
-            overflow: hidden;
-          "
-        >
-          <g filter="url(#filter0_d_2_220)">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M35.5798 143.281H177.824L142.244 72.1281L106.664 1H56.6316C25.2672 1.50179 0 27.0929 0 58.5799C0 63.2465 0.552014 67.7877 1.60586 72.1281C2.50915 75.9166 3.78882 79.5546 5.41977 82.9918L6.95035 86.0527L35.5798 143.281ZM569 58.58C569 63.2466 568.448 67.7877 567.394 72.1282C566.441 76.0672 565.086 79.8306 563.354 83.4184C562.953 84.3211 562.477 85.2238 562 86.1265L561.999 86.128L533.42 143.281L497.865 214.384L462.286 285.513L426.731 356.641L355.622 498.822L337.029 536.004L334.745 540.545C324.91 558.108 306.091 570 284.487 570C262.883 570 243.964 558.032 234.128 540.37L232.021 536.18L231.895 535.929L213.378 498.847L142.268 356.641H284.487V356.591L320.042 285.513L355.622 214.384L391.176 143.281L426.756 72.1282L462.311 1.00005H512.343C543.733 1.50183 569 27.0929 569 58.58ZM248.958 285.512H106.689L71.1342 214.384H213.378L248.958 285.512Z"
-              fill="#F3FCFF"
-            />
-          </g>
-          <defs>
-            <filter
-              id="filter0_d_2_220"
-              x="-36"
-              y="0"
-              width="605"
-              height="601"
-              filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
-            >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
-              <feColorMatrix
-                in="SourceAlpha"
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                result="hardAlpha"
-              />
-              <feOffset dx="-20" dy="15" />
-              <feGaussianBlur stdDeviation="8" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0.729412 0 0 0 0 0.878431 0 0 0 0 0.921569 0 0 0 0.2 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow_2_220"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow_2_220"
-                result="shape"
-              />
-            </filter>
-          </defs>
-        </svg>
-        <div class="employee-info">
-          <img src="assets/person.png" width="100" height="100" alt="avatar" />
-          <h1>Marek Ziemba</h1>
-          <h2>Product Strategy</h2>
-        </div>
-        <div class="buttons">
-          <a href="tel:+48 663 410 384"
-            ><img
-              src="assets/call.png"
-              width="151.5"
-              height="40"
-              style="padding-right: 5px"
-          /></a>
-          <a href="mailto:marek.ziemba@forvendi.com"
-            ><img src="assets/e-mail.png" width="151.5" height="40"
-          /></a>
-        </div>
+      <div class="logo">
+        <img src="assets/logo.png" width="202" height="48" alt="logo" />
+      </div>
 
-        <div class="data">
-          <div class="data-element">
-            <div class="data-element-content">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style="vertical-align: middle"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M5.54655 1.90896L6.97605 3.27852L6.98671 3.28898C7.37745 3.68051 7.53798 4.22334 7.53798 4.71246C7.53798 5.20159 7.37745 5.74439 6.98678 6.13592L6.29124 6.833C6.45498 7.40666 6.84525 8.0394 7.38858 8.58753C7.93338 9.13706 8.56591 9.53486 9.14978 9.701L9.84491 9.0044C10.2358 8.61266 10.7781 8.4514 11.2673 8.4514C11.7564 8.4514 12.2988 8.61266 12.6897 9.00433C12.6896 9.00433 12.6897 9.00433 12.6897 9.00433L14.1154 10.4332C14.5062 10.8247 14.6666 11.3675 14.6666 11.8567C14.6666 12.3458 14.5061 12.8886 14.1154 13.2801C13.0522 14.3456 11.6653 14.6667 11.0296 14.6667C10.0454 14.6667 9.15665 14.6061 8.13338 14.1274C7.13571 13.6607 6.05999 12.8205 4.6174 11.3747C3.15526 9.9094 2.32415 8.71113 1.86439 7.65826C1.39832 6.59086 1.33331 5.71605 1.33331 4.95065C1.33331 4.41522 1.4006 3.9027 1.62471 3.37872C1.84657 2.85998 2.20298 2.3746 2.71629 1.86017C3.1182 1.4574 3.67225 1.31617 4.16013 1.33502C4.64615 1.35379 5.16871 1.5339 5.54655 1.90896ZM4.10866 2.66736C3.88801 2.65883 3.73353 2.72839 3.66013 2.80196C3.22295 3.24008 2.98525 3.58824 2.85062 3.90304C2.71823 4.21258 2.66665 4.53358 2.66665 4.95065C2.66665 5.61414 2.72058 6.28709 3.08631 7.12466C3.45836 7.97673 4.17192 9.0406 5.56124 10.433C6.97011 11.8449 7.91398 12.5528 8.69838 12.9197C9.45711 13.2747 10.1126 13.3333 11.0296 13.3333C11.3675 13.3333 12.3957 13.1159 13.1716 12.3383C13.2562 12.2535 13.3333 12.0819 13.3333 11.8566C13.3333 11.6313 13.2562 11.4597 13.1716 11.375L11.7458 9.94613C11.6615 9.8616 11.491 9.78473 11.2673 9.78473C11.0436 9.78473 10.8731 9.8616 10.7887 9.94613L9.83825 10.8987C9.68991 11.0473 9.48031 11.1174 9.27245 11.0879C8.23085 10.9397 7.21405 10.3053 6.44171 9.52626C5.66958 8.74733 5.04967 7.73093 4.90437 6.71166C4.87481 6.50425 4.94447 6.295 5.09245 6.14669L6.04294 5.19414C6.12751 5.10938 6.20463 4.93775 6.20463 4.71244C6.20464 4.49054 6.12983 4.32074 6.04679 4.23472L4.61938 2.86718L4.60869 2.8567C4.51167 2.75948 4.32862 2.67585 4.10866 2.66736Z"
-                  fill="#0099C2"
-                />
-              </svg>
-              <a class="link-element" href="tel:+48 663 410 384"
-                >+48 663 410 384</a
-              >
-            </div>
-          </div>
-          <div class="data-element">
-            <div class="data-element-content">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style="vertical-align: middle"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M3.33331 3.33333C2.22875 3.33333 1.33331 4.22877 1.33331 5.33333V10.6667C1.33331 11.7713 2.22875 12.6667 3.33331 12.6667H12.6666C13.7712 12.6667 14.6666 11.7713 14.6666 10.6667V5.33333C14.6666 4.22877 13.7712 3.33333 12.6666 3.33333H3.33331ZM2.66665 5.45283V10.6667C2.66665 11.0349 2.96513 11.3333 3.33331 11.3333H12.6666C13.0348 11.3333 13.3333 11.0349 13.3333 10.6667V5.45285L7.99998 8.7862L2.66665 5.45283ZM12.0754 4.66667H3.92451L7.99998 7.21387L12.0754 4.66667Z"
-                  fill="#0099C2"
-                />
-              </svg>
-              <a class="link-element" href="mailto:marek.ziemba@forvendi.com"
-                >marek.ziemba@forvendi.com</a
-              >
-            </div>
-          </div>
-          <div class="data-element">
-            <div class="data-element-content">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style="vertical-align: middle"
-              >
-                <path
-                  d="M14 2.88235V13.1176C14 13.3517 13.907 13.5761 13.7416 13.7416C13.5761 13.907 13.3517 14 13.1176 14H2.88235C2.64834 14 2.42391 13.907 2.25844 13.7416C2.09296 13.5761 2 13.3517 2 13.1176V2.88235C2 2.64834 2.09296 2.42391 2.25844 2.25844C2.42391 2.09296 2.64834 2 2.88235 2H13.1176C13.3517 2 13.5761 2.09296 13.7416 2.25844C13.907 2.42391 14 2.64834 14 2.88235ZM5.52941 6.58824H3.76471V12.2353H5.52941V6.58824ZM5.68824 4.64706C5.68917 4.51357 5.66379 4.38121 5.61357 4.25753C5.56334 4.13385 5.48925 4.02128 5.39552 3.92623C5.30178 3.83119 5.19025 3.75554 5.06728 3.7036C4.94431 3.65166 4.81231 3.62445 4.67882 3.62353H4.64706C4.3756 3.62353 4.11526 3.73137 3.92331 3.92331C3.73137 4.11526 3.62353 4.3756 3.62353 4.64706C3.62353 4.91852 3.73137 5.17885 3.92331 5.3708C4.11526 5.56275 4.3756 5.67059 4.64706 5.67059C4.78055 5.67387 4.91339 5.65082 5.03797 5.60275C5.16255 5.55468 5.27644 5.48253 5.37313 5.39043C5.46982 5.29833 5.54742 5.18808 5.60149 5.06598C5.65555 4.94388 5.68503 4.81232 5.68824 4.67882V4.64706ZM12.2353 8.80471C12.2353 7.10706 11.1553 6.44706 10.0824 6.44706C9.73105 6.42947 9.38128 6.50429 9.06791 6.66407C8.75456 6.82385 8.48856 7.06299 8.29647 7.35765H8.24706V6.58824H6.58824V12.2353H8.35294V9.23176C8.32743 8.92415 8.42433 8.6189 8.62258 8.38232C8.82084 8.14573 9.10443 7.99693 9.41177 7.96824H9.47882C10.04 7.96824 10.4565 8.32118 10.4565 9.21059V12.2353H12.2212L12.2353 8.80471Z"
-                  fill="#0099C2"
-                />
-              </svg>
-              <a
-                class="link-element"
-                href="https://www.linkedin.com/in/marek-ziemba/"
-                target="_blank"
-                onclick="openLinkedInProfile(event)"
-                style="text-decoration: underline"
-                >marek-ziemba</a
-              >
-            </div>
-          </div>
-          <div class="data-element">
-            <div class="data-element-content">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style="vertical-align: middle"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M5.50388 3.28562C4.0026 4.08215 2.92719 5.5748 2.70791 7.33333H4.03165C4.17923 5.77015 4.81823 4.39832 5.43221 3.40061C5.45611 3.36177 5.48001 3.32344 5.50388 3.28562ZM4.03165 8.66666H2.70791C2.92719 10.4252 4.00259 11.9178 5.50385 12.7143C5.47999 12.6766 5.4561 12.6382 5.43221 12.5994C4.81823 11.6017 4.17922 10.2299 4.03165 8.66666ZM7.33331 12.9872C7.1127 12.7122 6.84013 12.3432 6.56775 11.9006C6.0297 11.0263 5.51512 9.90147 5.37229 8.66666H7.33331V12.9872ZM5.37229 7.33333C5.51513 6.09853 6.02971 4.97373 6.56775 4.09941C6.84013 3.6568 7.1127 3.28784 7.33331 3.01279V7.33333H5.37229ZM8.66665 8.66666V12.9872C8.88726 12.7122 9.15983 12.3432 9.43221 11.9006C9.97025 11.0263 10.4848 9.90147 10.6277 8.66666H8.66665ZM8.66665 3.01279V7.33333H10.6277C10.4848 6.09853 9.97025 4.97373 9.43221 4.09941C9.15983 3.6568 8.88726 3.28784 8.66665 3.01279ZM10.4961 3.28562C10.5199 3.32344 10.5438 3.36177 10.5678 3.40061C11.1817 4.39832 11.8207 5.77015 11.9683 7.33333H13.2921C13.0728 5.5748 11.9974 4.08215 10.4961 3.28562ZM10.4961 12.7144C10.52 12.6766 10.5439 12.6382 10.5678 12.5994C11.1817 11.6017 11.8207 10.2299 11.9683 8.66666H13.2921C13.0728 10.4252 11.9974 11.9178 10.4961 12.7144ZM1.33331 7.99999C1.33331 4.3181 4.31808 1.33333 7.99998 1.33333C11.6819 1.33333 14.6666 4.3181 14.6666 7.99999C14.6666 11.6819 11.6819 14.6667 7.99998 14.6667C4.31808 14.6667 1.33331 11.6819 1.33331 7.99999Z"
-                  fill="#0099C2"
-                />
-              </svg>
-              <a
-                class="link-element"
-                href="http://forvendi.com/"
-                target="_blank"
-                >forvendi.com</a
-              >
-            </div>
+      <div class="employee-info">
+        <img src="assets/person.png" width="100" height="100" alt="avatar" />
+        <h1>Marek Ziemba</h1>
+        <h2>Product Strategy</h2>
+      </div>
+      <div class="buttons">
+        <a href="tel:+48 663 410 384"
+          ><img
+            src="assets/call.png"
+            width="151.5"
+            height="40"
+            style="padding-right: 5px"
+        /></a>
+        <a href="mailto:marek.ziemba@forvendi.com"
+          ><img src="assets/e-mail.png" width="151.5" height="40"
+        /></a>
+      </div>
+
+      <div class="data">
+        <div class="data-element">
+          <div class="data-element-content">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              style="vertical-align: middle"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5.54655 1.90896L6.97605 3.27852L6.98671 3.28898C7.37745 3.68051 7.53798 4.22334 7.53798 4.71246C7.53798 5.20159 7.37745 5.74439 6.98678 6.13592L6.29124 6.833C6.45498 7.40666 6.84525 8.0394 7.38858 8.58753C7.93338 9.13706 8.56591 9.53486 9.14978 9.701L9.84491 9.0044C10.2358 8.61266 10.7781 8.4514 11.2673 8.4514C11.7564 8.4514 12.2988 8.61266 12.6897 9.00433C12.6896 9.00433 12.6897 9.00433 12.6897 9.00433L14.1154 10.4332C14.5062 10.8247 14.6666 11.3675 14.6666 11.8567C14.6666 12.3458 14.5061 12.8886 14.1154 13.2801C13.0522 14.3456 11.6653 14.6667 11.0296 14.6667C10.0454 14.6667 9.15665 14.6061 8.13338 14.1274C7.13571 13.6607 6.05999 12.8205 4.6174 11.3747C3.15526 9.9094 2.32415 8.71113 1.86439 7.65826C1.39832 6.59086 1.33331 5.71605 1.33331 4.95065C1.33331 4.41522 1.4006 3.9027 1.62471 3.37872C1.84657 2.85998 2.20298 2.3746 2.71629 1.86017C3.1182 1.4574 3.67225 1.31617 4.16013 1.33502C4.64615 1.35379 5.16871 1.5339 5.54655 1.90896ZM4.10866 2.66736C3.88801 2.65883 3.73353 2.72839 3.66013 2.80196C3.22295 3.24008 2.98525 3.58824 2.85062 3.90304C2.71823 4.21258 2.66665 4.53358 2.66665 4.95065C2.66665 5.61414 2.72058 6.28709 3.08631 7.12466C3.45836 7.97673 4.17192 9.0406 5.56124 10.433C6.97011 11.8449 7.91398 12.5528 8.69838 12.9197C9.45711 13.2747 10.1126 13.3333 11.0296 13.3333C11.3675 13.3333 12.3957 13.1159 13.1716 12.3383C13.2562 12.2535 13.3333 12.0819 13.3333 11.8566C13.3333 11.6313 13.2562 11.4597 13.1716 11.375L11.7458 9.94613C11.6615 9.8616 11.491 9.78473 11.2673 9.78473C11.0436 9.78473 10.8731 9.8616 10.7887 9.94613L9.83825 10.8987C9.68991 11.0473 9.48031 11.1174 9.27245 11.0879C8.23085 10.9397 7.21405 10.3053 6.44171 9.52626C5.66958 8.74733 5.04967 7.73093 4.90437 6.71166C4.87481 6.50425 4.94447 6.295 5.09245 6.14669L6.04294 5.19414C6.12751 5.10938 6.20463 4.93775 6.20463 4.71244C6.20464 4.49054 6.12983 4.32074 6.04679 4.23472L4.61938 2.86718L4.60869 2.8567C4.51167 2.75948 4.32862 2.67585 4.10866 2.66736Z"
+                fill="#0099C2"
+              ></path>
+            </svg>
+            <a class="link-element" href="tel:+48 663 410 384"
+              >+48 663 410 384</a
+            >
           </div>
         </div>
-        <div
-          class="floating-buttons"
-          style="
-            position: absolute;
-            right: 24px;
-            bottom: 170px;
-            cursor: pointer;
-          "
-        >
+        <div class="data-element">
+          <div class="data-element-content">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              style="vertical-align: middle"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M3.33331 3.33333C2.22875 3.33333 1.33331 4.22877 1.33331 5.33333V10.6667C1.33331 11.7713 2.22875 12.6667 3.33331 12.6667H12.6666C13.7712 12.6667 14.6666 11.7713 14.6666 10.6667V5.33333C14.6666 4.22877 13.7712 3.33333 12.6666 3.33333H3.33331ZM2.66665 5.45283V10.6667C2.66665 11.0349 2.96513 11.3333 3.33331 11.3333H12.6666C13.0348 11.3333 13.3333 11.0349 13.3333 10.6667V5.45285L7.99998 8.7862L2.66665 5.45283ZM12.0754 4.66667H3.92451L7.99998 7.21387L12.0754 4.66667Z"
+                fill="#0099C2"
+              ></path>
+            </svg>
+            <a class="link-element" href="mailto:marek.ziemba@forvendi.com"
+              >marek.ziemba@forvendi.com</a
+            >
+          </div>
+        </div>
+        <div class="data-element">
+          <div class="data-element-content">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              style="vertical-align: middle"
+            >
+              <path
+                d="M14 2.88235V13.1176C14 13.3517 13.907 13.5761 13.7416 13.7416C13.5761 13.907 13.3517 14 13.1176 14H2.88235C2.64834 14 2.42391 13.907 2.25844 13.7416C2.09296 13.5761 2 13.3517 2 13.1176V2.88235C2 2.64834 2.09296 2.42391 2.25844 2.25844C2.42391 2.09296 2.64834 2 2.88235 2H13.1176C13.3517 2 13.5761 2.09296 13.7416 2.25844C13.907 2.42391 14 2.64834 14 2.88235ZM5.52941 6.58824H3.76471V12.2353H5.52941V6.58824ZM5.68824 4.64706C5.68917 4.51357 5.66379 4.38121 5.61357 4.25753C5.56334 4.13385 5.48925 4.02128 5.39552 3.92623C5.30178 3.83119 5.19025 3.75554 5.06728 3.7036C4.94431 3.65166 4.81231 3.62445 4.67882 3.62353H4.64706C4.3756 3.62353 4.11526 3.73137 3.92331 3.92331C3.73137 4.11526 3.62353 4.3756 3.62353 4.64706C3.62353 4.91852 3.73137 5.17885 3.92331 5.3708C4.11526 5.56275 4.3756 5.67059 4.64706 5.67059C4.78055 5.67387 4.91339 5.65082 5.03797 5.60275C5.16255 5.55468 5.27644 5.48253 5.37313 5.39043C5.46982 5.29833 5.54742 5.18808 5.60149 5.06598C5.65555 4.94388 5.68503 4.81232 5.68824 4.67882V4.64706ZM12.2353 8.80471C12.2353 7.10706 11.1553 6.44706 10.0824 6.44706C9.73105 6.42947 9.38128 6.50429 9.06791 6.66407C8.75456 6.82385 8.48856 7.06299 8.29647 7.35765H8.24706V6.58824H6.58824V12.2353H8.35294V9.23176C8.32743 8.92415 8.42433 8.6189 8.62258 8.38232C8.82084 8.14573 9.10443 7.99693 9.41177 7.96824H9.47882C10.04 7.96824 10.4565 8.32118 10.4565 9.21059V12.2353H12.2212L12.2353 8.80471Z"
+                fill="#0099C2"
+              ></path>
+            </svg>
+            <a
+              class="link-element"
+              href="https://www.linkedin.com/in/marek-ziemba/"
+              target="_blank"
+              onclick="openLinkedInProfile(event)"
+              style="text-decoration: underline"
+              >marek-ziemba</a
+            >
+          </div>
+        </div>
+        <div class="data-element">
+          <div class="data-element-content">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              style="vertical-align: middle"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5.50388 3.28562C4.0026 4.08215 2.92719 5.5748 2.70791 7.33333H4.03165C4.17923 5.77015 4.81823 4.39832 5.43221 3.40061C5.45611 3.36177 5.48001 3.32344 5.50388 3.28562ZM4.03165 8.66666H2.70791C2.92719 10.4252 4.00259 11.9178 5.50385 12.7143C5.47999 12.6766 5.4561 12.6382 5.43221 12.5994C4.81823 11.6017 4.17922 10.2299 4.03165 8.66666ZM7.33331 12.9872C7.1127 12.7122 6.84013 12.3432 6.56775 11.9006C6.0297 11.0263 5.51512 9.90147 5.37229 8.66666H7.33331V12.9872ZM5.37229 7.33333C5.51513 6.09853 6.02971 4.97373 6.56775 4.09941C6.84013 3.6568 7.1127 3.28784 7.33331 3.01279V7.33333H5.37229ZM8.66665 8.66666V12.9872C8.88726 12.7122 9.15983 12.3432 9.43221 11.9006C9.97025 11.0263 10.4848 9.90147 10.6277 8.66666H8.66665ZM8.66665 3.01279V7.33333H10.6277C10.4848 6.09853 9.97025 4.97373 9.43221 4.09941C9.15983 3.6568 8.88726 3.28784 8.66665 3.01279ZM10.4961 3.28562C10.5199 3.32344 10.5438 3.36177 10.5678 3.40061C11.1817 4.39832 11.8207 5.77015 11.9683 7.33333H13.2921C13.0728 5.5748 11.9974 4.08215 10.4961 3.28562ZM10.4961 12.7144C10.52 12.6766 10.5439 12.6382 10.5678 12.5994C11.1817 11.6017 11.8207 10.2299 11.9683 8.66666H13.2921C13.0728 10.4252 11.9974 11.9178 10.4961 12.7144ZM1.33331 7.99999C1.33331 4.3181 4.31808 1.33333 7.99998 1.33333C11.6819 1.33333 14.6666 4.3181 14.6666 7.99999C14.6666 11.6819 11.6819 14.6667 7.99998 14.6667C4.31808 14.6667 1.33331 11.6819 1.33331 7.99999Z"
+                fill="#0099C2"
+              ></path>
+            </svg>
+            <a class="link-element" href="http://forvendi.com/" target="_blank"
+              >forvendi.com</a
+            >
+          </div>
+        </div>
+        <div class="floating-buttons">
           <a onclick="openPopup()" style="display: block">
             <img
               src="https://lh3.googleusercontent.com/d/1_lKyfH_ThGDV_G6oRoKmM0QsiqZ7KjMG"
-              alt=""
+              alt="popup icon"
               height="66"
               width="66"
             />
           </a>
           <a onclick="createContact()" style="display: block" id="downloadLink">
-            <img src="assets/contact.png" alt="" height="66" width="66"
+            <img
+              src="assets/contact.png"
+              alt="contact icon"
+              height="66"
+              width="66"
           /></a>
         </div>
       </div>
+
       <div id="overlay">
         <div id="popup">
           <div style="text-align: right; margin-bottom: 5px">
@@ -376,7 +329,7 @@
                 clip-rule="evenodd"
                 d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
                 fill="#0099C2"
-              />
+              ></path>
             </svg>
           </div>
 
@@ -394,7 +347,7 @@
                 clip-rule="evenodd"
                 d="M3.33331 3.33333C2.22875 3.33333 1.33331 4.22877 1.33331 5.33333V10.6667C1.33331 11.7713 2.22875 12.6667 3.33331 12.6667H12.6666C13.7712 12.6667 14.6666 11.7713 14.6666 10.6667V5.33333C14.6666 4.22877 13.7712 3.33333 12.6666 3.33333H3.33331ZM2.66665 5.45283V10.6667C2.66665 11.0349 2.96513 11.3333 3.33331 11.3333H12.6666C13.0348 11.3333 13.3333 11.0349 13.3333 10.6667V5.45285L7.99998 8.7862L2.66665 5.45283ZM12.0754 4.66667H3.92451L7.99998 7.21387L12.0754 4.66667Z"
                 fill="#0099C2"
-              />
+              ></path>
             </svg>
             <a
               class="popup-link-element"
@@ -415,7 +368,7 @@
               <path
                 d="M14 2.88235V13.1176C14 13.3517 13.907 13.5761 13.7416 13.7416C13.5761 13.907 13.3517 14 13.1176 14H2.88235C2.64834 14 2.42391 13.907 2.25844 13.7416C2.09296 13.5761 2 13.3517 2 13.1176V2.88235C2 2.64834 2.09296 2.42391 2.25844 2.25844C2.42391 2.09296 2.64834 2 2.88235 2H13.1176C13.3517 2 13.5761 2.09296 13.7416 2.25844C13.907 2.42391 14 2.64834 14 2.88235ZM5.52941 6.58824H3.76471V12.2353H5.52941V6.58824ZM5.68824 4.64706C5.68917 4.51357 5.66379 4.38121 5.61357 4.25753C5.56334 4.13385 5.48925 4.02128 5.39552 3.92623C5.30178 3.83119 5.19025 3.75554 5.06728 3.7036C4.94431 3.65166 4.81231 3.62445 4.67882 3.62353H4.64706C4.3756 3.62353 4.11526 3.73137 3.92331 3.92331C3.73137 4.11526 3.62353 4.3756 3.62353 4.64706C3.62353 4.91852 3.73137 5.17885 3.92331 5.3708C4.11526 5.56275 4.3756 5.67059 4.64706 5.67059C4.78055 5.67387 4.91339 5.65082 5.03797 5.60275C5.16255 5.55468 5.27644 5.48253 5.37313 5.39043C5.46982 5.29833 5.54742 5.18808 5.60149 5.06598C5.65555 4.94388 5.68503 4.81232 5.68824 4.67882V4.64706ZM12.2353 8.80471C12.2353 7.10706 11.1553 6.44706 10.0824 6.44706C9.73105 6.42947 9.38128 6.50429 9.06791 6.66407C8.75456 6.82385 8.48856 7.06299 8.29647 7.35765H8.24706V6.58824H6.58824V12.2353H8.35294V9.23176C8.32743 8.92415 8.42433 8.6189 8.62258 8.38232C8.82084 8.14573 9.10443 7.99693 9.41177 7.96824H9.47882C10.04 7.96824 10.4565 8.32118 10.4565 9.21059V12.2353H12.2212L12.2353 8.80471Z"
                 fill="#0099C2"
-              />
+              ></path>
             </svg>
             <a
               class="popup-link-element"
@@ -440,20 +393,73 @@
                 clip-rule="evenodd"
                 d="M5.50388 3.28562C4.0026 4.08215 2.92719 5.5748 2.70791 7.33333H4.03165C4.17923 5.77015 4.81823 4.39832 5.43221 3.40061C5.45611 3.36177 5.48001 3.32344 5.50388 3.28562ZM4.03165 8.66666H2.70791C2.92719 10.4252 4.00259 11.9178 5.50385 12.7143C5.47999 12.6766 5.4561 12.6382 5.43221 12.5994C4.81823 11.6017 4.17922 10.2299 4.03165 8.66666ZM7.33331 12.9872C7.1127 12.7122 6.84013 12.3432 6.56775 11.9006C6.0297 11.0263 5.51512 9.90147 5.37229 8.66666H7.33331V12.9872ZM5.37229 7.33333C5.51513 6.09853 6.02971 4.97373 6.56775 4.09941C6.84013 3.6568 7.1127 3.28784 7.33331 3.01279V7.33333H5.37229ZM8.66665 8.66666V12.9872C8.88726 12.7122 9.15983 12.3432 9.43221 11.9006C9.97025 11.0263 10.4848 9.90147 10.6277 8.66666H8.66665ZM8.66665 3.01279V7.33333H10.6277C10.4848 6.09853 9.97025 4.97373 9.43221 4.09941C9.15983 3.6568 8.88726 3.28784 8.66665 3.01279ZM10.4961 3.28562C10.5199 3.32344 10.5438 3.36177 10.5678 3.40061C11.1817 4.39832 11.8207 5.77015 11.9683 7.33333H13.2921C13.0728 5.5748 11.9974 4.08215 10.4961 3.28562ZM10.4961 12.7144C10.52 12.6766 10.5439 12.6382 10.5678 12.5994C11.1817 11.6017 11.8207 10.2299 11.9683 8.66666H13.2921C13.0728 10.4252 11.9974 11.9178 10.4961 12.7144ZM1.33331 7.99999C1.33331 4.3181 4.31808 1.33333 7.99998 1.33333C11.6819 1.33333 14.6666 4.3181 14.6666 7.99999C14.6666 11.6819 11.6819 14.6667 7.99998 14.6667C4.31808 14.6667 1.33331 11.6819 1.33331 7.99999Z"
                 fill="#0099C2"
-              />
+              ></path>
             </svg>
             <input readonly type="text" id="myInput" value="url here" />
             <button id="copyTextButton" onclick="copyText()">Kopiuj</button>
-            <div
-              style="
-                color: #0099c2;
-                font-family: Outfit, sans-serif;
-                font-size: 10px;
-              "
-              id="copyMessage"
-            ></div>
+            <div id="copyMessage"></div>
           </div>
         </div>
+      </div>
+
+      <div class="svgElem">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="360"
+          height="601"
+          viewBox="0 0 360 601"
+          fill="none"
+          style="
+            fill: #f3fcff;
+            filter: drop-shadow(-20px 15px 16px rgba(186, 224, 235, 0.2));
+            z-index: -1;
+          "
+        >
+          <g filter="url(#filter0_d_2_220)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M35.5798 143.281H177.824L142.244 72.1281L106.664 1H56.6316C25.2672 1.50179 0 27.0929 0 58.5799C0 63.2465 0.552014 67.7877 1.60586 72.1281C2.50915 75.9166 3.78882 79.5546 5.41977 82.9918L6.95035 86.0527L35.5798 143.281ZM569 58.58C569 63.2466 568.448 67.7877 567.394 72.1282C566.441 76.0672 565.086 79.8306 563.354 83.4184C562.953 84.3211 562.477 85.2238 562 86.1265L561.999 86.128L533.42 143.281L497.865 214.384L462.286 285.513L426.731 356.641L355.622 498.822L337.029 536.004L334.745 540.545C324.91 558.108 306.091 570 284.487 570C262.883 570 243.964 558.032 234.128 540.37L232.021 536.18L231.895 535.929L213.378 498.847L142.268 356.641H284.487V356.591L320.042 285.513L355.622 214.384L391.176 143.281L426.756 72.1282L462.311 1.00005H512.343C543.733 1.50183 569 27.0929 569 58.58ZM248.958 285.512H106.689L71.1342 214.384H213.378L248.958 285.512Z"
+              fill="#F3FCFF"
+            ></path>
+          </g>
+          <defs>
+            <filter
+              id="filter0_d_2_220"
+              x="-36"
+              y="0"
+              width="605"
+              height="601"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+              <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+              ></feColorMatrix>
+              <feOffset dx="-20" dy="15"></feOffset>
+              <feGaussianBlur stdDeviation="8"></feGaussianBlur>
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0.729412 0 0 0 0 0.878431 0 0 0 0 0.921569 0 0 0 0.2 0"
+              ></feColorMatrix>
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow_2_220"
+              ></feBlend>
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="effect1_dropShadow_2_220"
+                result="shape"
+              ></feBlend>
+            </filter>
+          </defs>
+        </svg>
       </div>
     </div>
 
